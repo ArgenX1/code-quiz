@@ -94,3 +94,20 @@ main{
 .hide{
     display: none;
 }
+
+h3{
+    font-size: 35px;
+    text-align: center;
+}
+
+ol{
+    font-size: 20px;
+}
+
+form{
+    font-size: 15px;
+    padding-left: 1rem;
+    padding-bottom: 1rem;
+}
+
+
