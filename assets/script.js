@@ -1,12 +1,13 @@
 const startButton = document.getElementById("start-button");
+const nextButton = document.getElementById("next-button");
 const questionBox = document.getElementById("question-box");
 const questionEl = document.getElementById("question");
 const answerButton1 = document.getElementById("button-1");
 const answerButton2 = document.getElementById("button-2");
 const answerButton3 = document.getElementById("button-3");
 const answerButton4 = document.getElementById("button-4");
-var shuffledQuestion;
-var currentQuestion;
+let shuffledQuestion, currentQuestion
+
 const questions = [
     {
         question: "In what year did Michael Schumacher win his first championship?",
@@ -50,15 +51,18 @@ const questions = [
 startButton.addEventListener("click", function(){
     startQuiz()
 })
+nextButton.addEventListener("click", function(){
+    currentQuestion++
+    nextQuestion()
+})
 
 // what happens when you click start button
 function startQuiz(){
     console.log("start")
     timer()
     startButton.classList.add("hide")
-    shuffledQuestion = questions.sort(function(){
-        Math.random() - .5
-    })
+    nextButton.classList.remove("hide")
+    shuffledQuestion = questions.sort(function(){ Math.random() - .5})
     currentQuestion = 0
     questionBox.classList.remove("hide")
     nextQuestion()
@@ -82,6 +86,8 @@ function showQuestion(question){
 
 // what happens when you select an answer
 function selectAnswer(){
+
+
 
 }
 
