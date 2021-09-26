@@ -3,10 +3,13 @@ const nextButton = document.getElementById("next-button");
 const finishButton = document.getElementById("finish-button");
 const questionBox = document.getElementById("question-box");
 const questionEl = document.getElementById("question");
+const answerButtons = document.getElementById("answer-buttons")
 const answerButton1 = document.getElementById("button-1");
 const answerButton2 = document.getElementById("button-2");
 const answerButton3 = document.getElementById("button-3");
 const answerButton4 = document.getElementById("button-4");
+var count = 99;
+var isFinished = false;
 let shuffledQuestion, currentQuestion
 
 const questions = [
@@ -54,19 +57,23 @@ const questions = [
     },
 ];
 
+
+
+
+
+
+
+
 // calls startQuiz function when button is clicked
-startButton.addEventListener("click", function(){
-    startQuiz()
-})
-nextButton.addEventListener("click", function(){
-    currentQuestion++
-    nextQuestion()
-})
+startButton.addEventListener("click", startQuiz);
+
+answerButtons.addEventListener("click", selectAnswer);
 
 // what happens when you click start button
 function startQuiz(){
     console.log("start")
     timer()
+    finishButton.classList.add("hide")
     startButton.classList.add("hide")
     shuffledQuestion = questions.sort(() => Math.random()-0.5)
     currentQuestion = 0
@@ -77,6 +84,7 @@ function startQuiz(){
 // sets next question on card
 function nextQuestion(){
     showQuestion(shuffledQuestion[currentQuestion])
+    console.log(shuffledQuestion[currentQuestion])
 
 }
 
@@ -91,28 +99,44 @@ function showQuestion(question){
 }
 
 // what happens when you select an answer
-function selectAnswer(){
+function selectAnswer(event){
+    console.log(event)
+    if(event.target.dataset.label === shuffledQuestion[currentQuestion].correct){
+        console.log("correct")
+        if(shuffledQuestion.length > currentQuestion + 1){
+            currentQuestion++
+            nextQuestion()
 
-
-
-    if(shuffledQuestion.length > currentQuestion + 1){
-        nextButton.classList.remove("hide")  
+        } else {
+            startButton.innerText = "Restart"
+            startButton.classList.remove("hide")
+            finishButton.classList.remove("hide")
+            isFinished = true
+        }
     } else {
-        startButton.innerText = "Restart"
-        startButton.classList.remove("hide")
-        finishButton.classList.remove("hide")
-}
+        console.log("wrong")
+        count-=10;
+    }
 }
 
 // timer function
 function timer(){
-    var count = 99;
     var interval = setInterval(function(){
-        document.getElementById("timer").innerText = "Timer: "+ count;
+        document.getElementById("timer").innerText = "Timer: " + count;
         count--;
         if( count === 0){
             clearInterval(interval);
             document.getElementById("timer").innerText = "You Lose"
+        } else if(isFinished){
+            clearInterval(interval);
+            document.getElementById("timer").innerText = "Timer: " + count + " Winner!" 
+            localStorage.setItem("count", JSON.stringify(count));
         }
+    
     }, 1000);
 }
+
+
+
+// TODO: resize finish button in CSS
+//TODO: show correct or incorret on answer click
