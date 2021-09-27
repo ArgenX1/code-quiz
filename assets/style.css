@@ -78,7 +78,7 @@ main{
     background-color: red;
 }
 
-.start-button, .next-button{
+.start-button, .finish-button{
     font-size: 2rem;
     font-weight: bold;
     padding: 10px 15px;
@@ -110,4 +110,10 @@ form{
     padding-bottom: 1rem;
 }
 
+#correct{
+    font-size: 15px;
+}
 
+#wrong{
+    font-size: 15px;
+}

@@ -2,7 +2,6 @@ const scoreList = document.getElementById("score-list")
 const scoreForm = document.getElementById("score-form")
 const initialsInput = document.querySelector("#initials")
 const scoreInput = document.getElementById("score")
-
 var score
 var scorers = []
 

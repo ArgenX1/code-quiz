@@ -8,10 +8,11 @@ const answerButton1 = document.getElementById("button-1");
 const answerButton2 = document.getElementById("button-2");
 const answerButton3 = document.getElementById("button-3");
 const answerButton4 = document.getElementById("button-4");
+const correctDisplay = document.getElementById("correct")
+const wrongDisplay = document.getElementById("wrong")
 var count = 99;
 var isFinished = false;
 let shuffledQuestion, currentQuestion
-
 const questions = [
     {
         question: "In what year did Michael Schumacher win his first championship?",
@@ -57,13 +58,6 @@ const questions = [
     },
 ];
 
-
-
-
-
-
-
-
 // calls startQuiz function when button is clicked
 startButton.addEventListener("click", startQuiz);
 
@@ -72,6 +66,8 @@ answerButtons.addEventListener("click", selectAnswer);
 // what happens when you click start button
 function startQuiz(){
     console.log("start")
+    count = 99
+    isFinished = false
     timer()
     finishButton.classList.add("hide")
     startButton.classList.add("hide")
@@ -103,6 +99,8 @@ function selectAnswer(event){
     console.log(event)
     if(event.target.dataset.label === shuffledQuestion[currentQuestion].correct){
         console.log("correct")
+        correctDisplay.classList.remove("hide")
+        wrongDisplay.classList.add("hide")
         if(shuffledQuestion.length > currentQuestion + 1){
             currentQuestion++
             nextQuestion()
@@ -114,6 +112,8 @@ function selectAnswer(event){
             isFinished = true
         }
     } else {
+        wrongDisplay.classList.remove("hide")
+        correctDisplay.classList.add("hide")
         console.log("wrong")
         count-=10;
     }
@@ -135,8 +135,3 @@ function timer(){
     
     }, 1000);
 }
-
-
-
-// TODO: resize finish button in CSS
-//TODO: show correct or incorret on answer click
