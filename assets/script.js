@@ -124,9 +124,10 @@ function timer(){
     var interval = setInterval(function(){
         document.getElementById("timer").innerText = "Timer: " + count;
         count--;
-        if( count === 0){
+        if( count <= 0){
             clearInterval(interval);
             document.getElementById("timer").innerText = "You Lose"
+            startQuiz()
         } else if(isFinished){
             clearInterval(interval);
             document.getElementById("timer").innerText = "Timer: " + count + " Winner!" 
