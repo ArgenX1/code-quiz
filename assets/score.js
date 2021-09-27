@@ -9,6 +9,7 @@ function renderScore(){
     // setting form blank
     scoreList.innerHTML = "";
 
+    // orders highscore list highest to lowest
     scorers.sort(function(a,b){
         return b.score - a.score
     })
@@ -66,9 +67,3 @@ scoreForm.addEventListener("submit", function(event){
 });
 
 initialize()
-
-
-
-
-// TODO: order score list from highest to lowest
-        //compare score attribute of scorer object
